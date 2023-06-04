@@ -1,12 +1,21 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+<the-header>
+</the-header>
   <router-view/>
 </template>
 
 <style lang="scss">
+
+body{
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #F8F9FF
+
+}
+
+
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -28,3 +37,6 @@ nav {
   }
 }
 </style>
+<script setup>
+import TheHeader from "@/components/TheHeader.vue";
+</script>

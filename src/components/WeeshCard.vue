@@ -7,17 +7,49 @@ import {ref} from "vue"
 export default {
   name: "WeeshCard",
 
-  setup() {
-      const progressValue = ref(10);
-      const maxValue = ref(100);
+    setup() {
+        const cards = ref([
+            {
+                id: 1,
+                title: "Brand New iPhone 13",
+                totalPrice: "$300.00",
+                leftToGrant: "$42.50",
+                progressValue: 10,
+                maxValue: 100,
+            },
+            {
+                id: 2,
+                title: "Smartwatch",
+                totalPrice: "$150.00",
+                leftToGrant: "$25.00",
+                progressValue: 25,
+                maxValue: 100,
+            },
+            // Additional card objects
+            {
+                id: 3,
+                title: "Wireless Earbuds",
+                totalPrice: "$80.00",
+                leftToGrant: "$15.00",
+                progressValue: 18,
+                maxValue: 100,
+            },
+            {
+                id: 4,
+                title: "Gift Card",
+                totalPrice: "$50.00",
+                leftToGrant: "$10.00",
+                progressValue: 20,
+                maxValue: 100,
+            },
 
+            // Add more card objects as needed
+        ]);
 
-    return {
-        progressValue,
-        maxValue
-
-    };
-  },
+        return {
+            cards,
+        };
+    },
 };
 
 
@@ -25,33 +57,27 @@ export default {
 </script>
 
 <template>
-<div class="cardContainer" >
-
-        <h3 class="giftTitle">Brand New Iphone 13</h3>
-
-    <div class="price_container">
-        <span class="total_product_price">$ 300.00</span>
-        <span class="left_to_grant">$ 42.50</span>
-    </div>
-
-    <div class="sub_price_container">
-        <span class="header_price">price</span>
-        <span class="header_price">to grant weesh</span>
-    </div>
-
-    <div class="progress_container">
-        <progress class="green-progress" :value="progressValue" :max="maxValue"></progress>
-
-    </div>
 
 
-    <div class="button-container">
-        <button class="button white">Contribute toward</button>
-        <button class="button blue">Complete wish</button>
-    </div>
+            <div class="cardContainer"   v-for="card in cards" :key="card.id">
+                <h3 class="giftTitle">{{ card.title }}</h3>
+                <div class="price_container">
+                    <span class="total_product_price">{{ card.totalPrice }}</span>
+                    <span class="left_to_grant">{{ card.leftToGrant }}</span>
+                </div>
+                <div class="sub_price_container">
+                    <span class="header_price">price</span>
+                    <span class="header_price">to grant weesh</span>
+                </div>
+                <div class="progress_container">
+                    <progress class="green-progress" :value="card.progressValue" :max="card.maxValue"></progress>
+                </div>
+                <div class="button-container">
+                    <button class="button white">Contribute toward</button>
+                    <button class="button blue">Complete wish</button>
+                </div>
+            </div>
 
-
-</div>
 
 
 </template>
@@ -82,6 +108,7 @@ h3 {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
     padding: 15px 15px 15px 15px;
+    margin-bottom: 25px;
 
 }
 

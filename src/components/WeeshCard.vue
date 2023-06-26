@@ -1,56 +1,73 @@
-<script>
+<script setup>
 
 
 
-import {ref} from "vue"
+// import {ref} from "vue";
+import { useRouter } from 'vue-router';
+import {useStore} from "@/store"
 
-export default {
-  name: "WeeshCard",
 
-    setup() {
-        const cards = ref([
-            {
-                id: 1,
-                title: "Brand New iPhone 13",
-                totalPrice: "$300.00",
-                leftToGrant: "$42.50",
-                progressValue: 10,
-                maxValue: 100,
-            },
-            {
-                id: 2,
-                title: "Smartwatch",
-                totalPrice: "$150.00",
-                leftToGrant: "$25.00",
-                progressValue: 25,
-                maxValue: 100,
-            },
-            // Additional card objects
-            {
-                id: 3,
-                title: "Wireless Earbuds",
-                totalPrice: "$80.00",
-                leftToGrant: "$15.00",
-                progressValue: 18,
-                maxValue: 100,
-            },
-            {
-                id: 4,
-                title: "Gift Card",
-                totalPrice: "$50.00",
-                leftToGrant: "$10.00",
-                progressValue: 20,
-                maxValue: 100,
-            },
 
-            // Add more card objects as needed
-        ]);
+const storePay = useStore()
 
-        return {
-            cards,
+
+
+      const  router = useRouter();
+        // const cards = ref([
+        //     {
+        //         id: 1,
+        //         title: "Brand New iPhone 13",
+        //         totalPrice: "$300.00",
+        //         leftToGrant: "$42.50",
+        //         progressValue: 10,
+        //         maxValue: 100,
+        //     },
+        //     {
+        //         id: 2,
+        //         title: "Smartwatch",
+        //         totalPrice: "$150.00",
+        //         leftToGrant: "$25.00",
+        //         progressValue: 25,
+        //         maxValue: 100,
+        //     },
+        //     // Additional card objects
+        //     {
+        //         id: 3,
+        //         title: "Wireless Earbuds",
+        //         totalPrice: "$80.00",
+        //         leftToGrant: "$15.00",
+        //         progressValue: 18,
+        //         maxValue: 100,
+        //     },
+        //     {
+        //         id: 4,
+        //         title: "Gift Card",
+        //         totalPrice: "$50.00",
+        //         leftToGrant: "$10.00",
+        //         progressValue: 20,
+        //         maxValue: 100,
+        //     },
+        //
+        //     // Add more card objects as needed
+        // ]);
+        const navigateToCardDetails = (card) => {
+            router.push({ name: 'DetailView', params: { id: card.id } });
         };
-    },
-};
+
+        const navigateToCompleteWish = () => {
+            alert("complete")
+        };
+
+        const navigateToContribute = () => {
+          alert("towards")
+        };
+
+
+
+
+
+
+
 
 
 
@@ -59,8 +76,7 @@ export default {
 <template>
 
 
-            <div class="cardContainer"   v-for="card in cards" :key="card.id">
-                <h3 class="giftTitle">{{ card.title }}</h3>
+            <div class="cardContainer"   v-for="card in storePay.cards" :key="card.id"  @click="navigateToCardDetails(card)">
                 <div class="price_container">
                     <span class="total_product_price">{{ card.totalPrice }}</span>
                     <span class="left_to_grant">{{ card.leftToGrant }}</span>
@@ -73,8 +89,8 @@ export default {
                     <progress class="green-progress" :value="card.progressValue" :max="card.maxValue"></progress>
                 </div>
                 <div class="button-container">
-                    <button class="button white">Contribute toward</button>
-                    <button class="button blue">Complete wish</button>
+                    <button @click="navigateToCompleteWish()"  class="button white">Contribute toward</button>
+                    <button @click="navigateToContribute()" class="button blue">Complete wish</button>
                 </div>
             </div>
 

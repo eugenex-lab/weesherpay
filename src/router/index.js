@@ -4,8 +4,20 @@ import HomeView from '../views/HomeView.vue'
 const routes = [
   {
     path: '/',
+    redirect:'/weesh'
+  },
+  {
+    path: '/weesh',
     name: 'home',
     component: HomeView
+  },
+  {
+
+    path: '/weesh/:id',
+    name: 'DetailView',
+    props: true,
+    component: () => import('../views/DetailView.vue')
+
   },
   {
     path: '/about',

@@ -82,10 +82,10 @@ export default {
   object-fit: cover;
 }
 img.companyLogo {
-  width: 102px;
-  height: 40px;
+    width: 153px;
+    height: 100px;
+    object-fit: cover;
 }
-
 .logo {
   padding: 0 0 0 16px;
 }

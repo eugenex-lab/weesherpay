@@ -34,7 +34,7 @@ export default {
                 <img class="appleStore" src="@/assets/appleLogo.mp4" alt="Download on iOS">
             </a>
             <a v-else   href="#">
-                <img class="andriodStore" src="@/assets/andriodStore.gif" alt="Download on Andriod">
+                <img class="androidStore" src="@/assets/andriodStore.gif" alt="Download on Andriod">
 <!--                <img class="appleStore" src="@/assets/apple-download.gif" alt="Download on iOS">-->
 
             </a>
@@ -47,47 +47,65 @@ export default {
 
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
     background: rgba(248, 249, 255, 0.65);
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
 }
 
-//.logo img {
-//  height: 40px; /* Adjust the height as needed */
-//}
-
 .store-download a {
-  display: inline-block;
-  padding: 10px 20px;
-  //background-color: #ff0000;
-  color: #e73b3b;
-  text-decoration: none;
-  border-radius: 5px;
+    display: inline-block;
+    /* padding: 10px 20px; */
+    color: #e73b3b;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 114px;
 }
 
-.andriodStore{
-    width: 160px;
-    height: 50px;
+.androidStore {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
-.appleStore{
-  width: 160px;
-  height: 50px;
-  border-radius: 6px;
-  -o-object-fit: cover;
-  object-fit: cover;
+.appleStore {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    -o-object-fit: cover;
+    object-fit: cover;
 }
+
 img.companyLogo {
     width: 153px;
     height: 100px;
-    object-fit: cover;
+    object-fit: contain;
 }
+
 .logo {
-  padding: 0 0 0 16px;
+    //padding: 0 0 0 16px;
+
+    display: inline-block;
+    /* padding: 10px 20px; */
+    color: #e73b3b;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 114px;
 }
+
+
+/* Media query to hide store download below 330px width */
+
+@media (max-width: 330px) {
+    .store-download {
+        display: none;
+    }
+}
+
 
 </style>

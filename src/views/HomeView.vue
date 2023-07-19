@@ -58,6 +58,8 @@ export default {
   display: flex;
   flex-direction: row;
   padding-bottom: 1rem;
+
+
 }
 
 .magicStick{

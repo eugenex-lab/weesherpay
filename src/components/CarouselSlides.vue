@@ -3,6 +3,9 @@
 
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
+import { ref } from 'vue'
+
+
 
 export default {
   name: "CarouselSlides",
@@ -10,6 +13,8 @@ export default {
 
 
   setup() {
+      const currentSlide = ref(4)
+
 
       const slides = [
           // {
@@ -32,7 +37,8 @@ export default {
 
 
     return {
-slides
+slides,
+        currentSlide
 
     };
   },

@@ -50,16 +50,20 @@ const storePay = useStore()
         //
         //     // Add more card objects as needed
         // ]);
-        const navigateToCardDetails = (card) => {
+        // const navigateToCardDetails = (card) => {
+
+// router.push({ name: 'DetailView', params: { id: card.id } });
+        //
+        // };
+
+        const navigateToCompleteWish = (card) => {
+            storePay.setCardId(card.id)
             router.push({ name: 'DetailView', params: { id: card.id } });
         };
 
-        const navigateToCompleteWish = () => {
-            alert("complete")
-        };
-
-        const navigateToContribute = () => {
-          alert("towards")
+        const navigateToContribute = (card) => {
+            storePay.setCardId(card.id)
+            router.push({ name: 'DetailView', params: { id: card.id } });
         };
 
 
@@ -76,7 +80,8 @@ const storePay = useStore()
 <template>
 
 
-            <div class="cardContainer"   v-for="card in storePay.cards" :key="card.id"  @click="navigateToCardDetails(card)">
+            <div class="cardContainer"   v-for="card in storePay.cards" :key="card.id" >
+                <h3 class="giftTitle">{{ card.title }}</h3>
                 <div class="price_container">
                     <span class="total_product_price">{{ card.totalPrice }}</span>
                     <span class="left_to_grant">{{ card.leftToGrant }}</span>
@@ -89,8 +94,8 @@ const storePay = useStore()
                     <progress class="green-progress" :value="card.progressValue" :max="card.maxValue"></progress>
                 </div>
                 <div class="button-container">
-                    <button @click="navigateToCompleteWish()"  class="button white">Contribute toward</button>
-                    <button @click="navigateToContribute()" class="button blue">Complete wish</button>
+                    <button @click="navigateToCompleteWish(card)"  class="button white">Contribute toward</button>
+                    <button @click="navigateToContribute(card)" class="button blue">Complete wish</button>
                 </div>
             </div>
 
@@ -123,7 +128,7 @@ h3 {
     background: rgba(255, 255, 255, 0.75);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
-    padding: 15px 15px 15px 15px;
+    padding: 15px 15px 7px 15px;
     margin-bottom: 25px;
 
 }

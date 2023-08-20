@@ -35,6 +35,8 @@ const magicWande = ref(require('@/assets/infoImg.png'))
   border-radius: 10px;
   background: var(--card-white, #ECEEF5);
   flex-shrink: 0;
+    width: 80%;
+    max-width: 335px;
 
 }
 
@@ -80,10 +82,10 @@ const magicWande = ref(require('@/assets/infoImg.png'))
 }
 
 .layout__format{
-  padding-top: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 </style>

@@ -1,11 +1,13 @@
 import { createPinia, defineStore } from 'pinia'
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 export const useStore = defineStore('storePay', {
 
   state: () => {
     return {
-      cardId: parseInt(Cookies.get('cardId') || '0', 10),
+      currentSlideData: [],
+      cardId: parseInt(localStorage.getItem('cardId') || '0', 10), // Initialize from localStorage
+
       cards: [
         {
           id: 1,
@@ -67,9 +69,22 @@ export const useStore = defineStore('storePay', {
     }
   },
 
+  mutations: {
+    // setCurrentSlideData(data) {
+    //   this.currentSlideData = data;
+    // },
+  },
+
   actions: {
     setCardId(cardId) {
-      this.cardId = cardId - 1 ;
+      this.cardId = cardId - 1;
+
+      // Update localStorage
+      localStorage.setItem('cardId', this.cardId.toString());
+    },
+
+    setCurrentSlideData(data) {
+      this.currentSlideData = data;
     },
   },
 

@@ -1,7 +1,12 @@
 <template>
-<the-header>
-</the-header>
-  <router-view/>
+
+
+        <the-header>
+        </the-header>
+
+        <router-view/>
+
+
 </template>
 
 <style lang="scss">
@@ -11,6 +16,11 @@ body{
   margin: 0;
   padding: 0;
   background-color: #F8F9FF
+
+}
+
+.container__top_level{
+  display: flex;
 
 }
 
@@ -39,4 +49,5 @@ nav {
 </style>
 <script setup>
 import TheHeader from "@/components/TheHeader.vue";
+import CardStatusInformation from "@/components/CardStatusInformation.vue";
 </script>

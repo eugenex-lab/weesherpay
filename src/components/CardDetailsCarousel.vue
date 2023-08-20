@@ -1,111 +1,122 @@
 <template>
 
+        <Carousel
+            id="gallery"
+            :items-to-show="1.4"
+            :items-to-scroll="3"
+            :wrap-around="true"
+            :transition="500"
+            v-bind="settings"
+            v-model="currentSlide"
+            @slideChange="onSlideChange"
 
-    <Carousel
+        >
+            <template #addons>
+                <Pagination />
+            </template>
 
-        id="gallery"
+            <Slide v-for="card in cards" :key="card.id">
+                <div class="carousel__item">
+                    <h3 class="item__title">{{ card.title }}</h3>
+                    <img class="imageCover" :src="card.pic" alt="Product Image" />
+                    <div class="carousel__item-content">
+                        <div class="price_container">
+                            <span class="total_product_price">{{ card.totalPrice }}</span>
+                            <span class="left_to_grant">{{ card.leftToGrant }}</span>
+                        </div>
+                        <div class="sub_price_container">
+                            <span class="header_price">price</span>
+                            <span class="header_price">to grant weesh</span>
+                        </div>
 
-        :items-to-show="1.4"
-        :items-to-scroll="3"
-        :wrap-around="true"
-        :transition="500"
-        v-bind="settings"
-        v-model="currentSlide" >
+                        <div class="line-10"></div>
 
-        <template #addons>
-            <Pagination />
-        </template>
+                        <div class="gift__details">{{ card.description }}</div>
 
-        <Slide v-for="card in cards" :key="card.id">
-            <div class="carousel__item">
-                <h3 class="item__title">{{ card.title }}</h3>
-                <img :src="card.pic" alt="Product Image" />
-                <div class="carousel__item-content">
-                    <div class="price_container">
-                        <span class="total_product_price">{{ card.totalPrice }}</span>
-                        <span class="left_to_grant">{{ card.leftToGrant }}</span>
+                        <div class="progress_container">
+                            <progress
+                                class="green-progress"
+                                :value="card.progressValue"
+                                :max="card.maxValue"
+                            ></progress>
+                        </div>
                     </div>
-                    <div class="sub_price_container">
-                        <span class="header_price">price</span>
-                        <span class="header_price">to grant weesh</span>
-                    </div>
-
-                    <div class="line-10"></div>
-
-                    <div class="gift__details">{{ card.description}}</div>
-
-
-
-                    <div class="progress_container">
-                        <progress class="green-progress" :value="card.progressValue" :max="card.maxValue"></progress>
-                    </div>
-
                 </div>
+            </Slide>
+        </Carousel>
 
 
 
-            </div>
-        </Slide>
 
-    </Carousel>
-<div>
-    {{currentSlide}}
 
-</div>
+
 </template>
 
-<script>
-
+<script setup>
 import {
-    computed, defineComponent
-    // , ref
-    , reactive
+    onMounted,
+
+    // computed,
+    reactive, ref, watch
 } from 'vue'
 import { Carousel, Pagination, Slide } from 'vue3-carousel'
-import {useStore} from "@/store"
-
-
+import { useStore } from '@/store'
 import 'vue3-carousel/dist/carousel.css'
 
-export default defineComponent({
-    name: 'CardProd',
-    components: {
-        Carousel,
-        Slide,
-        Pagination,
-    },
-    setup() {
-        const store = useStore()
+const store = useStore()
 
-        const settings = reactive({
-            itemsToShow: 1.4,
-            itemsToScroll: 3,
-            wrapAround: true,
-            transition: 500,
-            currentSlide: 0,
-        });
+const settings = reactive({
+    itemsToShow: 1.4,
+    itemsToScroll: 3,
+    //  itemsToShow: 3.4,
+    //  itemsToScroll: 5,
+    transition: 500,
 
-
-
-
-        const currentSlide =  computed(() => store.cardId)
-
-
-
-
-
-
-
-
-        return {
-            cards: store.cards,
-            currentSlide,
-            settings
-        }
-    },
 })
-</script>
 
+const currentSlide = ref(store.cardId)
+
+
+
+const cards = store.cards
+
+
+
+
+
+onMounted(() => {
+    // Check if store.cardId is not set
+    if (store.cardId === null || store.cardId === undefined) {
+        // Set it to 0
+        store.cardId = 0;
+    }
+
+    // Use the value of store.cardId to call setCurrentSlideData
+    store.setCurrentSlideData(cards[store.cardId]);
+});
+
+
+
+
+
+// // Watch for changes in currentSlide
+// watch(currentSlide, (newSlideIndex) => {
+//     // This code will be executed whenever currentSlide changes
+//     store.setCurrentSlideData(cards[newSlideIndex]);
+// });
+
+watch(currentSlide, (newSlideIndex) => {
+    // Check if currentSlide is not empty
+    if (currentSlide.value !== undefined && currentSlide.value !== null) {
+        // Call setCurrentSlideData if currentSlide is not empty
+        store.setCurrentSlideData(cards[newSlideIndex]);
+    }
+});
+
+
+
+
+</script>
 
 
 <style scoped>
@@ -162,12 +173,10 @@ export default defineComponent({
 
 .carousel__slide {
     opacity: 0.9;
-    transform: rotateY(-20deg) scale(0.9);
+    transform: rotateY(-20deg) scale(2%);
 }
 
-.carousel__slide--active ~ .carousel__slide {
-    transform: rotateY(20deg) scale(0.9);
-}
+
 
 .carousel__slide--prev {
     opacity: 1;
@@ -181,7 +190,7 @@ export default defineComponent({
 
 .carousel__slide--active {
     opacity: 1;
-    transform: rotateY(0) scale(1.1);
+    transform: rotateY(0) scale(1);
 }
 
 .carousel__item {
@@ -202,13 +211,15 @@ export default defineComponent({
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.05);
     padding: 10px;
     cursor: grab;
-    width: 21rem;
+    /* width: 21rem; */
     background: var(--blur-whity, rgba(255, 255, 255, 0.75));
     border-radius: 8px;
-    width: 95%;
+    /* width: 100%; */
+    max-width: 315px;
     /* height: 330px; */
     position: relative;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.05);
+
 
 }
 
@@ -232,6 +243,10 @@ export default defineComponent({
     /* width: 295px; */
     /* height: 155px; */
     position: relative;
+
+    position: relative;
+    max-width: 295px;
+    height: 155px;
 }
 
 .carousel__slide--prev[data-v-07920f37] {
@@ -247,17 +262,10 @@ export default defineComponent({
         text-align: left;
         display: flex;
         align-items: center;
-
-
-
-
     }
 
-
-
-
     .carousel__item img {
-        max-width: 200px;
+        //max-width: 200px;
         margin-bottom: 0;
         //margin-right: 10px;
     }
@@ -383,7 +391,7 @@ span.left_to_grant {
     border-style: solid;
     border-color: var(--card-white, #eceef5);
     border-width: 1px 0 0 0;
-    width: 295px;
+    //width: 295px;
     height: 0px;
     position: relative;
     transform-origin: 0 0;
@@ -406,6 +414,11 @@ span.left_to_grant {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.conatiner__format{
+    width: 90%;
+    display: flex;
 }
 
 

@@ -2,20 +2,28 @@
 
 
 import {ref} from "vue";
-import CardProd from "@/components/CardProd.vue";
 import AlertNote from "@/components/AlertNote.vue";
+import CardDetailsCarousel from "@/components/CardDetailsCarousel.vue";
+import { useStore } from '@/store'; // Import the Pinia store
 
 // import {ref} from "vue"
 // import {useStore} from "@/store"
 
-// const storePay = useStore()
-
+const store = useStore();
 const magicWande = ref(require('@/assets/magicStick.png'))
+const currentSlideData = ref(null);
 
+
+const contributeTowards = () => {
+    // Access the current slide data from the Pinia store
+    currentSlideData.value = store.currentSlideData;
+    // You can now use currentSlideData.value to display the details or perform any other action
+    console.log(JSON.stringify("xxxxxxx " + currentSlideData.value.color ))
+};
 </script>
 
 <template>
-  <div class="container">
+  <div class="containerCenter">
       <div class="top-container">
 
       <div class="weesherName">
@@ -33,11 +41,24 @@ const magicWande = ref(require('@/assets/magicStick.png'))
 
       </div>
 
+      <div class="section__format">
+          <CardDetailsCarousel >
+
+          </CardDetailsCarousel>
+
+      </div>
 
 
-          <CardProd>
 
-          </CardProd>
+
+
+
+
+
+
+
+
+
 
       <div class="button-container">
           <button @click="contributeTowards" class="button blue">Complete wish</button>
@@ -138,7 +159,7 @@ transform: rotate(90deg);
     justify-content: space-evenly;
     padding-top: 1rem;
     flex-direction: column;
-    width: auto;
+    width: 100%;
     align-items: center;
 
 }
@@ -165,6 +186,9 @@ button.button.white {
     font-size: 12px;
     width: 335px;
     height: 44px;
+    width: 85%;
+    max-width: 340px;
+    height: 44px;
     margin-top: 1rem;
 }
 
@@ -189,11 +213,26 @@ button.button.blue {
     font-weight: 600;
     cursor: grab;
     font-size: 12px;
-    width: 335px;
+    width: 85%;
+    max-width: 340px;
     height: 44px;
 
 }
 
+.section__format{
+  //background-color: #e73b3b;
+   max-width: 500px;
+    width: 100%;
+}
+
+
+.containerCenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 40px;
+}
 
 
 /* Buttons ends here */

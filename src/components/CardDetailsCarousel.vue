@@ -62,6 +62,7 @@ import {
 import { Carousel, Pagination, Slide } from 'vue3-carousel'
 import { useStore } from '@/store'
 import 'vue3-carousel/dist/carousel.css'
+import router from "@/router";
 
 const store = useStore()
 
@@ -110,6 +111,13 @@ watch(currentSlide, (newSlideIndex) => {
     if (currentSlide.value !== undefined && currentSlide.value !== null) {
         // Call setCurrentSlideData if currentSlide is not empty
         store.setCurrentSlideData(cards[newSlideIndex]);
+
+
+        const DetailView = router.currentRoute.value.path.replace(/\/\d+$/, `/${newSlideIndex}`);
+        router.push({ path: DetailView, replace: false })
+
+
+
     }
 });
 

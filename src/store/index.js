@@ -5,7 +5,9 @@ export const useStore = defineStore('storePay', {
 
   state: () => {
     return {
-      currentSlideData: [],
+      completeWish : false ,
+      contributeTowardClicked : false,
+      currentSlideData: {},
       cardId: parseInt(localStorage.getItem('cardId') || '0', 10), // Initialize from localStorage
 
       cards: [
@@ -75,7 +77,21 @@ export const useStore = defineStore('storePay', {
     // },
   },
 
+  setCompleteWish (payload) {
+    this.setCompleteWish = payload
+  },
+
+  setContributeTowardClicked (payload) {
+    this.setContributeTowardClicked = payload
+  },
+
+
+
   actions: {
+    saveDataToLocalStorage() {
+      localStorage.setItem('currentSlideData', JSON.stringify(this.currentSlideData));
+    },
+
     setCardId(cardId) {
       this.cardId = cardId - 1;
 

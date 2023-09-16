@@ -73,7 +73,7 @@
 .card__container{
 
   max-width: 576px;
-  width: 88%;
+  width: 100%;
   height: 90px;
   flex-shrink: 0;
   border-radius: 10px;

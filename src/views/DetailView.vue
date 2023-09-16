@@ -4,7 +4,9 @@
 import {ref} from "vue";
 import AlertNote from "@/components/AlertNote.vue";
 import CardDetailsCarousel from "@/components/CardDetailsCarousel.vue";
-import { useStore } from '@/store'; // Import the Pinia store
+import { useStore } from '@/store';
+import CardStatusInformation from "@/components/CardStatusInformation.vue";
+import router from "@/router";
 
 // import {ref} from "vue"
 // import {useStore} from "@/store"
@@ -18,12 +20,32 @@ const contributeTowards = () => {
     // Access the current slide data from the Pinia store
     currentSlideData.value = store.currentSlideData;
     // You can now use currentSlideData.value to display the details or perform any other action
-    console.log(JSON.stringify("xxxxxxx " + currentSlideData.value.color ))
+    // console.log(JSON.stringify("xxxxxxx " + currentSlideData.value.color ))
+
+    // Save the current data to local storage
+    store.saveDataToLocalStorage();
+
+
+    router.push({ name: 'payment-form' });
 };
+
+
+const completeWish  = () => {
+    // Access the current slide data from the Pinia store
+    currentSlideData.value = store.currentSlideData;
+    // You can now use currentSlideData.value to display the details or perform any other action
+    console.log(JSON.stringify("xxxxxxx " + currentSlideData.value.color ))
+
+    router.push({ name: 'payment-form' });
+};
+
+
 </script>
 
 <template>
   <div class="containerCenter">
+      <CardStatusInformation class="format__card_header"></CardStatusInformation>
+
       <div class="top-container">
 
       <div class="weesherName">
@@ -46,7 +68,10 @@ const contributeTowards = () => {
 
           </CardDetailsCarousel>
 
+          <alert-note></alert-note>
       </div>
+
+
 
 
 
@@ -61,12 +86,12 @@ const contributeTowards = () => {
 
 
       <div class="button-container">
-          <button @click="contributeTowards" class="button blue">Complete wish</button>
-          <button @click="completeWish"  class="button white">Contribute toward</button>
+          <button @click="completeWish" class="button blue">Complete wish</button>
+          <button @click="contributeTowards"  class="button white">Contribute toward</button>
 
       </div>
 
-      <alert-note></alert-note>
+
 
 
 
@@ -130,11 +155,9 @@ div#\31 {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    padding-top: 1rem;
     width: 100%;
     display: flex;
     justify-content: space-around;
-    padding-top: 1rem;
     align-content: stretch;
     flex-direction: column;
 }
@@ -161,7 +184,7 @@ transform: rotate(90deg);
     flex-direction: column;
     width: 100%;
     align-items: center;
-
+    padding-bottom: 100px;
 }
 
 //.button {
@@ -187,7 +210,7 @@ button.button.white {
     width: 335px;
     height: 44px;
     width: 85%;
-    max-width: 340px;
+    max-width: 370px;
     height: 44px;
     margin-top: 1rem;
 }
@@ -214,7 +237,7 @@ button.button.blue {
     cursor: grab;
     font-size: 12px;
     width: 85%;
-    max-width: 340px;
+    max-width: 370px;
     height: 44px;
 
 }
@@ -231,7 +254,12 @@ button.button.blue {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding-top: 40px;
+    //padding-top: 40px;
+}
+
+.format__card_header{
+    margin-bottom: 40px;
+    width: 88%;
 }
 
 

@@ -1,5 +1,6 @@
 <template xmlns:src="http://www.w3.org/1999/xhtml">
   <div class="home">
+      <CardStatusInformation></CardStatusInformation>
 
       <carousel-slides></carousel-slides>
 
@@ -19,10 +20,12 @@
 
 import CarouselSlides from "@/components/CarouselSlides.vue";
 import WeeshCard from "@/components/WeeshCard.vue";
+import CardStatusInformation from "@/components/CardStatusInformation.vue";
 
 export default {
   name: 'HomeView',
   components: {
+      CardStatusInformation,
       WeeshCard,
       CarouselSlides
       // HelloWorld

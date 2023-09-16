@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+
 const routes = [
   {
     path: '/',
@@ -10,6 +11,11 @@ const routes = [
     path: '/weesh',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/weesh/:id/payment',
+    name: 'payment-form',
+    component:() => import('../views/PaymentForm.vue')
   },
   {
 

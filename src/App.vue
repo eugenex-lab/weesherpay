@@ -46,8 +46,10 @@ nav {
     }
   }
 }
+
+
+
 </style>
 <script setup>
 import TheHeader from "@/components/TheHeader.vue";
-import CardStatusInformation from "@/components/CardStatusInformation.vue";
 </script>

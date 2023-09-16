@@ -45,9 +45,6 @@ const magicWande = ref(require('@/assets/infoImg.png'))
   align-items: center;
 }
 
-.image {
-  //margin-right: 10px;
-}
 
 .image img {
   border-radius: 5px;
@@ -82,7 +79,7 @@ const magicWande = ref(require('@/assets/infoImg.png'))
 }
 
 .layout__format{
-    padding-top: 50px;
+    //padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,28 +1,12 @@
-<script >
+<script setup>
 import { ref, onMounted } from 'vue';
-import CardStatusInformation from "@/components/CardStatusInformation"
 
-export default {
-    name: 'TheHeader',
-    components: {CardStatusInformation},
+const isIOS = ref(false);
 
-
-    setup() {
-
-        const isIOS = ref(false);
-
-        onMounted(() => {
-            const userAgent = navigator.userAgent.toLowerCase();
-            isIOS.value = /(iphone|ipad|ipod|ios)/i.test(userAgent);
-        });
-
-        return {
-            isIOS
-        };
-    }
-};
-
-
+onMounted(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    isIOS.value = /(iphone|ipad|ipod|ios)/i.test(userAgent);
+});
 </script>
 
 <template>
@@ -31,26 +15,17 @@ export default {
             <img class="companyLogo" src="@/assets/Weeshr_Dark.svg" alt="weesher Logo">
         </div>
         <div class="store-download">
-            <a v-if="isIOS"   href="ios-download-link">
-
+            <a v-if="isIOS" href="ios-download-link">
                 <img class="appleStore" src="@/assets/weeshr-applestore.svg" alt="Download on iOS">
             </a>
-            <a v-else   href="#">
-                <img class="androidStore" src="@/assets/weeshr-playstore.svg" alt="Download on Andriod">
-<!--                <img class="appleStore" src="@/assets/apple-download.gif" alt="Download on iOS">-->
-
+            <a v-else href="#">
+                <img class="androidStore" src="@/assets/weeshr-playstore.svg" alt="Download on Android">
             </a>
         </div>
     </header>
     <div class="container__format">
-        <card-status-information></card-status-information>
 
     </div>
-
-
-
-
-
 </template>
 
 <style scoped lang="scss">
